@@ -16,6 +16,7 @@ A Python utility to transfer photos from Amazon Photos (AWS S3) to Google Drive.
 - Amazon AWS account with access to S3
 - Google Cloud Console project with Drive API enabled
 - OAuth 2.0 credentials from Google Cloud Console
+- Sufficient storage space for temporary files during transfer
 
 ## Setup
 
@@ -42,33 +43,28 @@ pip install -r requirements.txt
 
 4. Configure AWS credentials:
    - Create a `.env` file in the project root
-   - Add your AWS credentials:
+   - Add your AWS credentials and S3 bucket name:
 
 ```bash
 AWS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key
 AWS_REGION=your_region
+S3_BUCKET_NAME=your-bucket-name
 ```
 
 ## Usage
 
-1. Update the main function in `cloud_transfer.py` with your bucket name:
-
-```python
-transfer.transfer_photos('your-amazon-photos-bucket')
-```
-
-2. Run the script:
+1. Run the script:
 
 ```bash
 python cloud_transfer.py
 ```
 
-On first run, the script will:
-- Open a browser window for Google authentication
-- Create a token.json file for future authentication
-- Create a new folder in Google Drive called "Amazon Photos Transfer"
-- Begin transferring photos from Amazon Photos to Google Drive
+The script will:
+- Authenticate with Google Drive on first run
+- Create a "Amazon Photos Transfer" folder in Google Drive
+- Transfer photos from your configured S3 bucket to Google Drive
+- Display progress during transfer
 
 ## File Structure
 
@@ -130,4 +126,17 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For issues and feature requests, please create an issue in the repository.
+
+## Performance Considerations
+
+- Large transfers may take significant time
+- Consider running transfers during off-peak hours
+- Memory usage scales with file size
+- Temporary storage needs equal to largest file being transferred
+
+## Known Limitations
+
+- Does not preserve original photo upload dates
+- No support for photo metadata transfer
+- Maximum file size limited by available RAM
 
