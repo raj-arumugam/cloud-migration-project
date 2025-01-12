@@ -32,12 +32,21 @@ graph TB
         MON[Monitoring & Logging]
     end
 
+    LB --> APP
+    APP --> DB
     DB --> DP
     DP --> ETL
     ETL --> CDB
     ETL --> DV
     DV --> MON
-    // ...existing connections...
+    CLB --> API
+    API --> MSV
+    MSV --> CONT
+    CONT --> CDB
+    CDB --> CACHE
+    WAF --> API
+    IAM --> MSV
+    ENC --> CDB
 ```
 
 ## Components Description
