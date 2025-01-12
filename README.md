@@ -23,7 +23,7 @@ A Python utility to transfer photos from Amazon Photos (AWS S3) to Google Drive.
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/raj-arumugam/cloud-migration-project
 cd cloud-photo-transfer
 ```
 
