@@ -99,12 +99,111 @@ The migration will follow a phased approach:
 
 ## Data Transfer Logic
 
-The data transfer process is managed by the `cloud_transfer.py` script, which includes the following steps:
+The data transfer process is managed by the `cloud_transfer.py` script, which implements the following business logic:
 
-1. **Data Extraction**: Extract data from on-premises databases.
-2. **Data Transformation**: Transform data to match the cloud database schema.
-3. **Data Loading**: Load transformed data into the cloud database.
-4. **Data Validation**: Validate the integrity and accuracy of the transferred data.
-5. **Error Handling**: Implement error handling and retry mechanisms to ensure reliable data transfer.
+### Transfer Workflow
 
-The script ensures data consistency and minimal downtime during the migration process.
+1. **Pre-transfer Validation**
+   - Source system availability check
+   - Destination system capacity verification
+   - Network bandwidth assessment
+   - Required permissions validation
+
+2. **Data Extraction Process**
+   ```python
+   def extract_data():
+       - Implement connection pooling
+       - Use configurable batch sizes (default: 1000 records)
+       - Apply source-specific filters
+       - Track extraction progress
+       - Generate extraction metrics
+   ```
+
+3. **Transformation Rules**
+   - Schema mapping based on configuration
+   - Data type conversions
+   - Field normalization
+   - Business logic application
+   - Data enrichment
+
+4. **Loading Strategy**
+   ```python
+   def load_data():
+       - Bulk insert optimization
+       - Transaction management
+       - Conflict resolution
+       - Progress tracking
+       - Performance metrics collection
+   ```
+
+### Business Rules Implementation
+
+1. **Data Prioritization**
+   - Critical business data first
+   - Historical data in phases
+   - Dependencies management
+   - Resource allocation based on priority
+
+2. **Validation Checkpoints**
+   - Source-target record count match
+   - Data integrity verification
+   - Business rule compliance
+   - Referential integrity checks
+   - Custom validation rules
+
+3. **Error Management**
+   ```python
+   def handle_errors():
+       - Retry logic with exponential backoff
+       - Error categorization
+       - Notification system
+       - Recovery procedures
+       - Audit logging
+   ```
+
+### Performance Optimization
+
+1. **Resource Management**
+   - Dynamic scaling of resources
+   - Load balancing
+   - Memory optimization
+   - Connection pooling
+   - Batch size tuning
+
+2. **Monitoring and Metrics**
+   - Transfer speed tracking
+   - Resource utilization
+   - Error rates
+   - Processing time
+   - Success/failure ratios
+
+### Rollback Procedures
+
+1. **Checkpoint System**
+   - Regular state snapshots
+   - Transaction logging
+   - Recovery points creation
+   - Version control
+
+2. **Recovery Process**
+   ```python
+   def rollback_transfer():
+       - Identify failure point
+       - Restore to last checkpoint
+       - Validate restored state
+       - Resume transfer
+   ```
+
+## Business Continuity
+
+1. **Zero Downtime Strategy**
+   - Parallel processing
+   - Shadow writing
+   - Progressive cutover
+   - Fallback mechanisms
+
+2. **Data Consistency**
+   - ACID compliance
+   - Eventually consistent model
+   - Conflict resolution
+   - Data reconciliation
